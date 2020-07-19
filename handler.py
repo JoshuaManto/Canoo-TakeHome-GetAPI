@@ -19,17 +19,21 @@ except:
 # GET REQUEST
 def getTenMostRecent(event, context):
 
+    # SQL Query to get the 10 most recent error logs
+    # Since the timestamp is UNIX timestamp, the higher the value the more recent it is
+    # So the 10 highest values are the most recent logs
     query = "SELECT error_number, time_stamp FROM Logs ORDER BY time_stamp DESC LIMIT 10"
 
+    # Query execution
     cursor = connection.cursor()
     cursor.execute(query)
 
     rows = cursor.fetchall()
 
+
     # Build the result variable
     # array of objects
-    # Error code and timestamp only
-    
+    # Error code and timestamp only  
     result = []
     for row in rows:
         data = {}
@@ -38,6 +42,7 @@ def getTenMostRecent(event, context):
         # print("{0} {1}".format(row[0], row[1]))
         result.append(data)
 
+    # Response body
     body = {
         "result": result
     }
