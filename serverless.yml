@@ -16,6 +16,8 @@ provider:
     HOST: ${self:custom.secrets.HOST}
     PASS: ${self:custom.secrets.PASS}
     PORT: ${self:custom.secrets.PORT}
+  apiKeys:
+    - API-KEY-GET
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -41,6 +43,7 @@ functions:
           path: getTenMostRecent
           method: get
           cors: true
+          private: true
 
 plugins:
   - serverless-python-requirements
